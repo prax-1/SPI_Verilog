@@ -51,7 +51,7 @@ This project involves designing a Serial Peripheral Interface (SPI) communicatio
   The testbench simulates the top module by providing clock signals, start signals, and data inputs. It observes the outputs and verifies the correct functionality of the SPI communication system.
 
   ### Testbench Code
-  module tb_top;
+  ''' module tb_top;
 
     reg clk = 0;
     reg start = 1;
@@ -84,7 +84,7 @@ This project involves designing a Serial Peripheral Interface (SPI) communicatio
         $finish;
     end
 
-endmodule
+endmodule '''
 
 ## Conclusion
 This project demonstrates the implementation of an SPI communication system in Verilog. The top module integrates the SPI transmitter and receiver, manages clock generation, and handles state transitions for data transmission and reception. The design is configurable for different bit lengths, making it versatile for various applications.
