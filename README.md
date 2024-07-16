@@ -70,7 +70,7 @@ This project involves designing a Serial Peripheral Interface (SPI) communicatio
         .sclk(sclk),
         .dout(dout)
     );
-
+```
     // Clock generation process
     always #5 clk = ~clk;
 
@@ -85,7 +85,7 @@ This project involves designing a Serial Peripheral Interface (SPI) communicatio
         $finish;
     end
 
-endmodule
+endmodule 
 ```
 
 ## Conclusion
