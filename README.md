@@ -3,6 +3,42 @@
 ## Project Overview
 This project involves designing a Serial Peripheral Interface (SPI) communication module in Verilog. The design includes both an SPI transmitter and receiver, allowing data exchange between a master device and a slave device. The goal is to implement a configurable SPI communication system and verify its functionality through simulation using VIVADO Software.
 
+## Understanding SPI
+SPI stands for Serial Peripheral Interface.
+SPI is a synchronous protocol that allows a master device to initiate communication 
+with a slave device.  Data is exchanged between these devices.
+
+ - SPI is a Synchronous protocol.
+ - The clock signal is provided by the master to provide synchronization.  The clock 
+    signal controls when data can change and when it is valid for reading.
+ - Since SPI is synchronous, it has a clock pulse along with the data.  RS-232 and other 
+  asynchronous protocols do not use a clock pulse, but the data must be timed very 
+  accurately.  
+ - Since SPI has a clock signal, the clock can vary without disrupting the data.  The 
+data rate will simply change along with the changes in the clock rate.  This makes 
+SPI ideal when the microcontroller is being clocked imprecisely, such as by a RC 
+oscillator.
+- SPI is a Master-Slave protocol.
+- Only the master device can control the clock line, SCK.
+- No data will be transferred unless the clock is manipulated.
+- All slaves are controlled by the clock which is manipulated by the master device.
+- The slaves may not manipulate the clock.  The SSP configuration registers will 
+  control how a device will respond to the clock input
+- SPI is a Data Exchange protocol.  As data is being clocked out, new data is also 
+being clocked in.
+- When one “transmits” data, the incoming data must be read before attempting to 
+transmit again.  If the incoming data is not read, then the data will be lost and the 
+- SPI module may become disabled as a result.  Always read the data after a transfer 
+has taken place, even if the data has no use in your application.
+- Data is always “exchanged” between devices.  No device can just be a “transmitter” 
+or just a “receiver” in SPI.  However, each device has two data lines, one for input 
+and one for output.  
+- These data exchanges are controlled by the clock line, SCK, which is controlled by 
+the master device. 
+
+![image](https://github.com/user-attachments/assets/a347c903-bd5e-42e7-9437-99e5b1fc7ec3)
+
+
 ## Project Components
   1. Top Module : This module integrates the SPI transmitter and receiver, handles the clock generation for SPI communication, and manages the state transitions for sending and receiving data.
   2. Testbench (tb): This module is used to simulate the top module, providing the necessary inputs and observing the outputs to verify the functionality of the SPI communication system.
