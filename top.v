@@ -1,12 +1,12 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
-// Engineer: 
+// Engineer: Prakhar Gupta
 // 
 // Create Date: 11.07.2024 11:34:25
-// Design Name: 
+// Design Name: SPI
 // Module Name: top
-// Project Name: 
+// Project Name: SPI_Communication
 // Target Devices: 
 // Tool Versions: 
 // Description: 
@@ -33,8 +33,8 @@ module top(
     parameter clk_value = 100_000;
     parameter bits = 12;
     reg sclkt = 0;
-    integer count = 0;
     reg cs,done;
+    integer count = 0;
     
     always@(posedge clk) begin 
     
