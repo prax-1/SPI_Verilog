@@ -34,7 +34,32 @@ has taken place, even if the data has no use in your application.
 or just a “receiver” in SPI.  However, each device has two data lines, one for input 
 and one for output.  
 - These data exchanges are controlled by the clock line, SCK, which is controlled by 
-the master device. 
+the master device.
+
+Each transmission starts with a falling edge of CSB and ends with the 
+rising edge. During transmission, commands and data are controlled by 
+SCK and CSB according to the following rules: 
+- commands and data are shifted; MSB first, LSB last 
+- each output data/status bits are shifted out on the falling edge of SCK (MISO line) 
+- each bit is sampled on the rising edge of SCK (MOSI line) 
+- after the device is selected with the falling edge of CSB, an 8-bit command is received. The command 
+defines the operations to be performed 
+- the rising edge of CSB ends all data transfer and resets internal counter and command register 
+- if an invalid command is received, no data is shifted into the chip and the MISO remains in high 
+impedance state until the falling edge of CSB. This reinitializes the serial communication. 
+- In order to perform other commands than those listed in Table 1, the lock register content must be set 
+correctly. If such a command is fed without setting the correct lock register content, no data will be 
+shifted into the chip and the MISO remains in high impedance state until the falling edge of CSB. 
+- data transfer to MOSI continues immediately after receiving the command in all cases where data is to 
+be written to ASIC’s internal registers 
+- data transfer out from MISO starts with the falling edge of SCK immediately after the last bit of the SPI 
+command is sampled in on the rising edge of SCK 
+- maximum SPI clock frequency is 500kHz  
+- maximum data transfer speed for RDAX and RDAY is 6600 samples per sec / channel 
+SPI command can be either an individual command or a combination of command and data. In the case of 
+combined command and data, the input data follows uninterruptedly the SPI command and the output data is 
+shifted out parallel with the input data
+
 
 ![image](https://github.com/user-attachments/assets/a347c903-bd5e-42e7-9437-99e5b1fc7ec3)
 
