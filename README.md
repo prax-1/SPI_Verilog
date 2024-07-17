@@ -101,8 +101,8 @@ shifted out parallel with the input data
   The received data is stored in a shift register (shiftrx), and the bits are reversed using the reverse_bits module to ensure correct alignment.
 
   ## Reverse Bits Module Description
-  ### Inputs da_in : Input 12 bit data to be reversed
-  ### Outputs da_out : Output data with bits reversed
+  Inputs da_in : Input 12 bit data to be reversed
+  Outputs da_out : Output data with bits reversed
 
   ### Functionality
   This module iterates over the input data bits and reverses their order, ensuring that the transmitted data is correctly aligned with the received data.
